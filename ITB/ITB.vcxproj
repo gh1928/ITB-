@@ -132,7 +132,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Framework.cpp" />
+    <ClCompile Include="Manager\ResourceMgr.cpp" />
+    <ClCompile Include="Scene\Info\MapInfo.cpp" />
+    <ClCompile Include="Object\Mech\Mech.cpp" />
+    <ClCompile Include="Object\Object.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\DevScene.cpp" />
+    <ClCompile Include="Manager\InputMgr.cpp" />
+    <ClCompile Include="Manager\Animator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Framework\Utils.cpp" />
+    <ClCompile Include="Scene\SceneMgr.cpp" />
+    <ClCompile Include="Object\SpriteObj.cpp" />
+    <ClCompile Include="Object\Vek\Vek.cpp" />
+    <ClCompile Include="Scene\Info\Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Framework\Framework.h" />
+    <ClInclude Include="Manager\ResourceMgr.h" />
+    <ClInclude Include="3rd\rapidcsv.h" />
+    <ClInclude Include="Scene\Info\MapInfo.h" />
+    <ClInclude Include="Object\Mech\Mech.h" />
+    <ClInclude Include="Object\Object.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\DevScene.h" />
+    <ClInclude Include="Manager\InputMgr.h" />
+    <ClInclude Include="Manager\Animator.h" />
+    <ClInclude Include="Framework\Const.h" />
+    <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="Scene\SceneMgr.h" />
+    <ClInclude Include="3rd\Singleton.h" />
+    <ClInclude Include="Object\SpriteObj.h" />
+    <ClInclude Include="Object\Vek\Vek.h" />
+    <ClInclude Include="Scene\Info\Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
