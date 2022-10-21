@@ -6,4 +6,11 @@ graphics/tiles/water_0.png,0
 graphics/tiles/ground_rail.png,0
 graphics/ui/tilesel.png,0
 graphics/ui/setmechpos.png,0
+graphics/ui/startphase/dropend.png,0
+graphics/ui/startphase/dropendcheck.png,0
+graphics/ui/startphase/dropriftwalkers/dropcombat.png,0
+graphics/ui/startphase/dropriftwalkers/droptank.png,0
+graphics/ui/startphase/dropriftwalkers/dropartil.png,0
 graphics/mech/combat/mech_punch.png,0
+graphics/mech/cannon/mech_tank.png,0
+graphics/mech/artillery/mech_artillery.png,0

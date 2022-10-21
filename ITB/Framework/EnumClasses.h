@@ -15,6 +15,7 @@ enum class Origins
 
 enum class Scenes
 {
+	None = -1,
 	DevScene,
 };
 
@@ -28,12 +29,22 @@ enum class TileTypes
 
 enum class Squd
 {
+	None = -1,
 	RiftWalkers,
 };
 
 enum class MechClass
 {
+	None = -1,
 	Prime,
 	Brute,
 	Range,
+};
+
+enum class GamePhase
+{
+	None = -1,
+	Start,
+	Playing,
+	End,
 };

@@ -1,7 +1,8 @@
 #include "SelectionCheck.h"
 #include "../Manager/InputMgr.h"
 
-SelectionCheck::SelectionCheck()
+SelectionCheck::SelectionCheck(bool& isCursor)
+	:isCursor(isCursor)
 {
 	SetTexture(*RESOURCE_MGR->GetTexture("graphics/ui/tilesel.png"));
 	localCenterPos = Vector2f{ 56.f, 42.f };	

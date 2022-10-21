@@ -4,9 +4,9 @@ class SelectionCheck : public SpriteObj
 {
 protected:
 	Vector2f localCenterPos;
-	bool isCursor;
+	bool& isCursor;
 public:
-	SelectionCheck();
+	SelectionCheck(bool& isCursor);
 	virtual ~SelectionCheck(){}	
 
 	virtual void Update(float dt);

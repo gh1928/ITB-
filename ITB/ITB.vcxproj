@@ -132,6 +132,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Mech\RiftWalkers\ArtilleryMech.cpp" />
+    <ClCompile Include="Object\Mech\RiftWalkers\CannonMech.cpp" />
     <ClCompile Include="Object\FillStartPos.cpp" />
     <ClCompile Include="Object\Mech\RiftWalkers\CombatMech.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
@@ -153,6 +155,9 @@
     <ClCompile Include="Object\SelectionCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Mech\MechHeaders.h" />
+    <ClInclude Include="Object\Mech\RiftWalkers\ArtilleryMech.h" />
+    <ClInclude Include="Object\Mech\RiftWalkers\CannonMech.h" />
     <ClInclude Include="Object\FillStartPos.h" />
     <ClInclude Include="Object\Mech\RiftWalkers\CombatMech.h" />
     <ClInclude Include="Framework\Framework.h" />

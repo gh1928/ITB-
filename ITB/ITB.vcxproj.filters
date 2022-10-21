@@ -72,6 +72,12 @@
     <ClCompile Include="Object\FillStartPos.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Mech\RiftWalkers\CannonMech.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Mech\RiftWalkers\ArtilleryMech.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Const.h">
@@ -138,6 +144,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\FillStartPos.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Mech\RiftWalkers\CannonMech.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Mech\RiftWalkers\ArtilleryMech.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Mech\MechHeaders.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

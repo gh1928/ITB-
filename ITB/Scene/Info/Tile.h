@@ -4,19 +4,25 @@
 #include <list>
 #include "../../Manager/InputMgr.h"
 #include "../../Object/SelectionCheck.h"
-#include "../../Object/Mech/RiftWalkers/CombatMech.h"
+#include "../../Object/Mech/MechHeaders.h"
 
 class Tile
 {
 protected:	
-	static int tileCount;
-	int index;
+	static int tileCount;	
+	int indexI;
+	int indexJ;
+
+	static int mechCount;
+
+	bool isCursor;
 
 	list<Object*> tObjList;	
 	TileTypes type;
 
 	Vector2f position;
 
+	GamePhase phase;
 public:
 	Tile();
 	~Tile();
@@ -33,6 +39,9 @@ public:
 	list<Object*>* GetObjList() { return &tObjList; }
 
 	void Update(float dt);
+
+public:
+	void UpdateStartPhase(float dt);
 	void MechDrop();
 };
 

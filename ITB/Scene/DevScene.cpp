@@ -50,6 +50,7 @@ void DevScene::Exit()
 void DevScene::Update(float dt)
 {
 	mapInfo.Update(dt);
+	UpdateStartPhase(dt);
 }
 
 void DevScene::Draw(RenderWindow& window)
@@ -110,4 +111,8 @@ void DevScene::SetTileTex(int i, int j)
 		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/water_0.png"));
 		break;
 	}
+}
+
+void DevScene::UpdateStartPhase(float dt)
+{
 }

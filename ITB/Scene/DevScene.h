@@ -29,4 +29,5 @@ public:
 	void MakeBackground();
 	void SetTileTex(int i, int j);
 
+	void UpdateStartPhase(float dt);
 };

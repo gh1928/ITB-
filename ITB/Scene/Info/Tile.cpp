@@ -5,11 +5,14 @@
 #include "../../Object/FillStartPos.h"
 
 int Tile::tileCount = -1;
+int Tile::mechCount = -1;
 
 Tile::Tile()
 {
 	tileCount += 1;
-	index = tileCount % 64;
+	int index = tileCount % 64;	
+	indexI = index / 8;
+	indexJ = index % 8;
 }
 
 Tile::~Tile()
@@ -24,20 +27,19 @@ Tile::~Tile()
 
 void Tile::Init()
 {	
-	int i = index / 8;
-	int j = index % 8;
-
-	if ((1 <= i && i <= 6) && ( 1 <= j && j <= 3 ))
+	if ((1 <= indexI && indexI <= 6) && ( 1 <= indexJ && indexJ <= 3 ))
 	{
 		tObjList.push_back(new FillStartPos);
 	}	
 
-	tObjList.push_back(new SelectionCheck);
+	tObjList.push_back(new SelectionCheck(isCursor));
 
 	for (auto obj : tObjList)
 	{
 		obj->Init();
 	}
+
+	phase = GamePhase::Start;
 }
 
 void Tile::SetPos(Vector2f pos)
@@ -51,23 +53,43 @@ void Tile::SetPos(Vector2f pos)
 
 void Tile::Update(float dt)
 {	
-	Vector2f mousePos = InputMgr::GetMousePos();
-	mousePos -= position;	
-
-	if (InputMgr::GetMouseButtonDown(Mouse::Left))
-	{
-		MechDrop();
-	}
+	if(phase == GamePhase::Start)
+		UpdateStartPhase(dt);
 
 	for (auto obj : tObjList)
 	{
 		if(obj->GetActive())
-			obj->Update(dt);		
+			obj->Update(dt);
+	}
+}
+
+void Tile::UpdateStartPhase(float dt)
+{
+	if (InputMgr::GetMouseButtonDown(Mouse::Left))
+	{
+		if ((1 <= indexI && indexI <= 6) && (1 <= indexJ && indexJ <= 3) && isCursor)
+			MechDrop();
 	}
 }
 
 void Tile::MechDrop()
-{
-	tObjList.push_back(new CombatMech);
-	tObjList.back()->SetPos(position);
+{	
+	if (mechCount > 2)
+		return;
+
+	switch (++mechCount)
+	{
+	case 0:
+		tObjList.push_back(new CombatMech);
+		tObjList.back()->SetPos(position);
+		break;
+	case 1:
+		tObjList.push_back(new CannonMech);
+		tObjList.back()->SetPos(position);
+		break;
+	case 2:
+		tObjList.push_back(new ArtilleryMech);
+		tObjList.back()->SetPos(position);
+		break;
+	}
 }
