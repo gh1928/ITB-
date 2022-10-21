@@ -8,17 +8,17 @@
 
 class Tile
 {
-protected:
+protected:	
+	static int tileCount;
+	int index;
+
 	list<Object*> tObjList;	
 	TileTypes type;
 
 	Vector2f position;
-	Vector2f centerPos;
-	Vector2f localCenterPos;
-
-	SelectionCheck* selectionCheck;
 
 public:
+	Tile();
 	~Tile();
 public:
 	void Init();

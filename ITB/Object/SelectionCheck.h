@@ -3,10 +3,13 @@
 class SelectionCheck : public SpriteObj
 {
 protected:
+	Vector2f localCenterPos;
+	bool isCursor;
 public:
-	SelectionCheck(){}
-	virtual ~SelectionCheck(){}
-public:
-	virtual void Update(float dt) {}	
+	SelectionCheck();
+	virtual ~SelectionCheck(){}	
+
+	virtual void Update(float dt);
+	virtual void Draw(RenderWindow& window);
 };
 

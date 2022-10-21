@@ -2,6 +2,15 @@
 #include "../../Framework/Utils.h"
 #include <iostream>
 #include "../../Manager/ResourceMgr.h"
+#include "../../Object/FillStartPos.h"
+
+int Tile::tileCount = -1;
+
+Tile::Tile()
+{
+	tileCount += 1;
+	index = tileCount % 64;
+}
 
 Tile::~Tile()
 {
@@ -10,39 +19,45 @@ Tile::~Tile()
 		if(obj != nullptr)
 			delete obj;	
 	}
-	tObjList.clear();	
+	tObjList.clear();
 }
 
 void Tile::Init()
 {	
-	selectionCheck = new SelectionCheck;
-	selectionCheck->SetTexture(*RESOURCE_MGR->GetTexture("graphics/ui/tilesel.png"));	
-	selectionCheck->SetActive(false);
-	tObjList.push_back(selectionCheck);
-	localCenterPos = Vector2f{ 56.f, 42.f };
+	int i = index / 8;
+	int j = index % 8;
+
+	if ((1 <= i && i <= 6) && ( 1 <= j && j <= 3 ))
+	{
+		tObjList.push_back(new FillStartPos);
+	}	
+
+	tObjList.push_back(new SelectionCheck);
+
+	for (auto obj : tObjList)
+	{
+		obj->Init();
+	}
 }
 
 void Tile::SetPos(Vector2f pos)
 {
 	position = pos;
-	selectionCheck->SetPos(position);
-	centerPos = position + Vector2f{ 56.f, 42.f };	
+	for (auto obj : tObjList)
+	{
+		obj->SetPos(position);
+	}		
 }
 
 void Tile::Update(float dt)
 {	
 	Vector2f mousePos = InputMgr::GetMousePos();
-	mousePos -= position;
+	mousePos -= position;	
 
-	selectionCheck->SetActive((abs(localCenterPos.x - mousePos.x) / localCenterPos.x + abs(localCenterPos.y - mousePos.y) / localCenterPos.y) <1.f);
-	
-	if (selectionCheck->GetActive())
+	if (InputMgr::GetMouseButtonDown(Mouse::Left))
 	{
-		if (InputMgr::GetMouseButtonDown(Mouse::Left))
-		{
-			MechDrop();
-		}
-	}	
+		MechDrop();
+	}
 
 	for (auto obj : tObjList)
 	{

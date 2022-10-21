@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\FillStartPos.cpp" />
     <ClCompile Include="Object\Mech\RiftWalkers\CombatMech.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Manager\ResourceMgr.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Object\SelectionCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\FillStartPos.h" />
     <ClInclude Include="Object\Mech\RiftWalkers\CombatMech.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Manager\ResourceMgr.h" />
