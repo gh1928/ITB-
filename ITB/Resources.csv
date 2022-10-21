@@ -2,3 +2,4 @@ id,"type(0: Texture, 1: Font, 2: Sound "
 graphics/tiles/ground_0.png,0
 graphics/tiles/water_0.png,0
 graphics/tiles/ground_rail.png,0
+graphics/ui/tilesel.png,0

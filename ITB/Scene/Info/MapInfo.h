@@ -16,7 +16,7 @@ public:
 	~MapInfo();
 
 	void Init();
-	Tile GetTilesInfo(int idx1, int idx2) { return mapInfo[idx1][idx2]; }
+	Tile& GetTilesInfo(int idx1, int idx2) { return mapInfo[idx1][idx2]; }
 
 	void Update(float dt);
 };

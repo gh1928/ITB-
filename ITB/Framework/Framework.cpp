@@ -1,5 +1,5 @@
 #include "Framework.h"
-//#include "InputMgr.h"
+#include "../Manager/InputMgr.h"
 #include "../Manager/ResourceMgr.h"
 #include "../Scene/SceneMgr.h"
 //#include "SoundMgr.h"
@@ -38,7 +38,7 @@ RenderWindow& Framework::GetWindow()
 bool Framework::Init(int width, int height)
 {
     windowSize = { width, height };
-    window.create(VideoMode(windowSize.x, windowSize.y), "ITB");
+    window.create(VideoMode(windowSize.x, windowSize.y), "ITB", Style::Titlebar);
 
     RESOURCE_MGR->LoadAll();
     //SOUND_MGR->Init();
@@ -51,21 +51,24 @@ bool Framework::Init(int width, int height)
 
 bool Framework::Do()
 {
+    //View view(sf::FloatRect(0.f, 0.f, 1280.f, 720.f));
+    //window.setView(view);
+    //view.zoom(0.5f);
     while (window.isOpen())
     {
         deltaTime = clock.restart();
         float dt = GetDT();
 
-        //InputMgr::Update(dt);
+        InputMgr::Update(dt);
         sf::Event ev;
         while (window.pollEvent(ev))
-        {
-            // if (ev.type == sf::Event::Closed)
-            //if (InputMgr::GetKeyDown(Keyboard::Escape))
-            //{
-            //    window.close();
-            //}
-            //InputMgr::ProcessInput(ev);
+        {            
+            if (InputMgr::GetKeyDown(Keyboard::Escape))
+            {
+                window.close();
+                exit(1);
+            }
+            InputMgr::ProcessInput(ev); 
         }
 
         SCENE_MGR->Update(dt);

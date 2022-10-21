@@ -17,6 +17,6 @@ public:
 	virtual void Update(float dt){}
 	virtual void Draw(RenderWindow& window);
 
-	void SetTexture(Texture& tex) { sprite.setTexture(tex);	}
+	void SetTexture(Texture& tex);
 };
 

@@ -20,7 +20,20 @@ enum class Scenes
 
 enum class TileTypes
 {
+	None = -1,
 	Stand,
 	Rail,
 	Water,
+};
+
+enum class Squd
+{
+	RiftWalkers,
+};
+
+enum class MechClass
+{
+	Prime,
+	Brute,
+	Range,
 };

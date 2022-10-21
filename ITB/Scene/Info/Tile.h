@@ -1,16 +1,19 @@
 #pragma once
 #include "../../Object/Object.h"
 #include "../../Framework/EnumClasses.h"
+#include <list>
 class Tile
 {
 protected:
-	Object* obj;
+	list<Object*> tObjList;	
 	TileTypes type;
 public:
 	void SetType(TileTypes type) { this->type = type; }
 	TileTypes GetType() { return type; }
+		
+	void AddObject(Object* obj) { tObjList.push_back(obj); }
+	list<Object*>* GetObjList() { return &tObjList; }
 
-	void SetObject(Object* obj) { this->obj = obj; }
-	Object* GetObject() { return obj; }
+	void Update(float dt);
 };
 
