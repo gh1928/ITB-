@@ -14,7 +14,8 @@ void MapInfo::Init()
 	{
 		for (int j = 0; j < 8; ++j)
 		{
-			mapInfo[i][j].SetType(TileTypes::Stand);			
+			mapInfo[i][j].Init();
+			mapInfo[i][j].SetType(TileTypes::Stand);	
 		}
 	}
 }

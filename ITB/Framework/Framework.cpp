@@ -41,8 +41,7 @@ bool Framework::Init(int width, int height)
     window.create(VideoMode(windowSize.x, windowSize.y), "ITB", Style::Titlebar);
 
     RESOURCE_MGR->LoadAll();
-    //SOUND_MGR->Init();
-    //DATATABLE_MGR->Init();
+    //SOUND_MGR->Init();    
     SCENE_MGR->Init();
     //InputMgr::Init();
 
@@ -51,9 +50,6 @@ bool Framework::Init(int width, int height)
 
 bool Framework::Do()
 {
-    //View view(sf::FloatRect(0.f, 0.f, 1280.f, 720.f));
-    //window.setView(view);
-    //view.zoom(0.5f);
     while (window.isOpen())
     {
         deltaTime = clock.restart();

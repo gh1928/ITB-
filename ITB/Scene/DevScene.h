@@ -8,6 +8,8 @@
 class DevScene : public Scene
 {
 protected:
+	array<Sprite, 82> backGround;	
+
 	array<array<SpriteObj*, 8>, 8> drawMap;
 	array<array<list<Object*>*, 8>, 8> drawObject;
 	MapInfo mapInfo;
@@ -23,4 +25,8 @@ public:
 
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);
+public:
+	void MakeBackground();
+	void SetTileTex(int i, int j);
+
 };

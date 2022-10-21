@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "../Framework/Utils.h"
+#include "../Manager/ResourceMgr.h"
 
 class SpriteObj : public Object
 {

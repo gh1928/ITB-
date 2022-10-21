@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Mech\RiftWalkers\CombatMech.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Manager\ResourceMgr.cpp" />
     <ClCompile Include="Scene\Info\MapInfo.cpp" />
@@ -148,8 +149,10 @@
     <ClCompile Include="Object\Vek\Vek.cpp" />
     <ClCompile Include="Scene\Info\Tile.cpp" />
     <ClCompile Include="Object\Mech\Weapon.cpp" />
+    <ClCompile Include="Object\SelectionCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Mech\RiftWalkers\CombatMech.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Manager\ResourceMgr.h" />
     <ClInclude Include="3rd\rapidcsv.h" />
@@ -168,6 +171,8 @@
     <ClInclude Include="Object\Vek\Vek.h" />
     <ClInclude Include="Scene\Info\Tile.h" />
     <ClInclude Include="Object\Mech\Weapon.h" />
+    <ClInclude Include="Object\SelectionCheck.h" />
+    <ClInclude Include="Framework\Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
