@@ -104,12 +104,15 @@ void DevScene::SetTileTex(int i, int j)
 	case TileTypes::Stand:
 		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
 		break;
-	case TileTypes::Rail:
-		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_rail.png"));
-		break;
 	case TileTypes::Water:
 		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/water_0.png"));
 		break;
+	case TileTypes::Rail:
+		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_rail.png"));
+		break;
+	default:
+		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
+		break;			
 	}
 }
 

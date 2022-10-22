@@ -17,14 +17,18 @@ enum class Scenes
 {
 	None = -1,
 	DevScene,
+	DevScene2,
 };
 
 enum class TileTypes
 {
 	None = -1,
-	Stand,
-	Rail,
+	Stand = 0,
 	Water,
+	Mountain,
+	Building1,
+	Building2,
+	Rail,
 };
 
 enum class Squd

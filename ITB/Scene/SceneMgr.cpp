@@ -1,8 +1,10 @@
 #include "SceneMgr.h"
 #include "DevScene.h"
+#include "DevScene2.h"
 bool SceneMgr::Init()
 {
     sceneMap[Scenes::DevScene] = new DevScene;
+    sceneMap[Scenes::DevScene2] = new DevScene2;
     currScene = Scenes::DevScene;
 
     for (auto pair : sceneMap)
