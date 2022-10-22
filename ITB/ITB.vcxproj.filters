@@ -81,6 +81,9 @@
     <ClCompile Include="Scene\DevScene2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Object\InteractiveObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Const.h">
@@ -159,6 +162,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scene\DevScene2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\InteractiveObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

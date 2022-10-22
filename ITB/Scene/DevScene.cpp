@@ -31,6 +31,7 @@ void DevScene::Init()
 			mapInfo.GetTilesInfo(i, j).SetPos(drawMap[i][j]->GetPos());
 
 			drawObject[i][j] = mapInfo.GetTilesInfo(i, j).GetObjList();
+			drawIObject[i][j] = mapInfo.GetTilesInfo(i, j).GetIObjList();
 		}
 	}
 }
@@ -73,6 +74,11 @@ void DevScene::Draw(RenderWindow& window)
 		for (int j = 0; j < 8; ++j)
 		{
 			for (auto obj : *drawObject[i][j])
+			{
+				if (obj != nullptr && obj->GetActive())
+					obj->Draw(window);
+			}
+			for (auto obj : *drawIObject[i][j])
 			{
 				if (obj != nullptr && obj->GetActive())
 					obj->Draw(window);

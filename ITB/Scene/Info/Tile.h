@@ -4,6 +4,7 @@
 #include <list>
 #include "../../Manager/InputMgr.h"
 #include "../../Object/SelectionCheck.h"
+#include "../../Object/InteractiveObject.h"
 #include "../../Object/Mech/MechHeaders.h"
 
 class Tile
@@ -18,6 +19,8 @@ protected:
 	bool isCursor;
 
 	list<Object*> tObjList;	
+	list<InteractiveObject*> tIObjList;
+
 	TileTypes type;
 
 	Vector2f position;
@@ -36,7 +39,9 @@ public:
 	Vector2f GetPos() { return position; }
 		
 	void AddObject(Object* obj) { tObjList.push_back(obj); }
+	void AddIObject(InteractiveObject* iobj) { tIObjList.push_back(iobj); }
 	list<Object*>* GetObjList() { return &tObjList; }
+	list<InteractiveObject*>* GetIObjList() { return &tIObjList; }
 
 	void Update(float dt);
 

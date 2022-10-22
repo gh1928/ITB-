@@ -21,8 +21,8 @@ void MapInfo::Init()
 		{			
 			is >> number;
 
-			mapInfo[i][j].Init();			
 			mapInfo[i][j].SetType((TileTypes)atoi(&number));
+			mapInfo[i][j].Init();
 		}
 	}	
 }

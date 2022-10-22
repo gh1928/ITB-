@@ -7,7 +7,7 @@ protected:
 	bool& isCursor;
 public:
 	SelectionCheck(bool& isCursor);
-	virtual ~SelectionCheck(){}	
+	virtual ~SelectionCheck(){}
 
 	virtual void Update(float dt);
 	virtual void Draw(RenderWindow& window);

@@ -1,14 +1,10 @@
 #pragma once
-#include "../SpriteObj.h"
+#include "../InteractiveObject.h"
 #include "../../Framework/EnumClasses.h"
-class Mech : public SpriteObj
+class Mech : public InteractiveObject
 {
 protected:
 	MechClass type;
-
-	int maxHp;
-	int hp;
-
 	int move;
 
 public:
