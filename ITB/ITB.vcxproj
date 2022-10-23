@@ -132,6 +132,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\StructObject\Building.cpp" />
+    <ClCompile Include="Object\StructObject\Mountain.cpp" />
     <ClCompile Include="Object\InteractiveObject.cpp" />
     <ClCompile Include="Scene\DevScene2.cpp" />
     <ClCompile Include="Object\Mech\RiftWalkers\ArtilleryMech.cpp" />
@@ -157,6 +159,9 @@
     <ClCompile Include="Object\SelectionCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\GameObjectsHeader.h" />
+    <ClInclude Include="Object\StructObject\Building.h" />
+    <ClInclude Include="Object\StructObject\Mountain.h" />
     <ClInclude Include="Object\InteractiveObject.h" />
     <ClInclude Include="Scene\DevScene2.h" />
     <ClInclude Include="Object\Mech\MechHeaders.h" />

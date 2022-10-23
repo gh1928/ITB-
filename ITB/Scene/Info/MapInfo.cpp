@@ -1,6 +1,7 @@
 #include "MapInfo.h"
 #include <vector>
 #include <fstream>
+#include "../../Scene/Scene.h"
 
 MapInfo::MapInfo()
 {
@@ -10,8 +11,9 @@ MapInfo::~MapInfo()
 {
 }
 
-void MapInfo::Init()
+void MapInfo::Init(Scene* scene)
 {
+	this->scene = scene;
 	ifstream is("stage/stage01.txt");
 	char number;
 
@@ -22,7 +24,7 @@ void MapInfo::Init()
 			is >> number;
 
 			mapInfo[i][j].SetType((TileTypes)atoi(&number));
-			mapInfo[i][j].Init();
+			mapInfo[i][j].Init(this->scene);
 		}
 	}	
 }

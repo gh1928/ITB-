@@ -1,13 +1,17 @@
 #pragma once
 #include "../Framework/EnumClasses.h"
 #include "../Framework/Framework.h"
+#include <list>
 
 using namespace std;
 
+class Object;
 class Scene
 {
 protected:
 	Scenes type;
+	list<Object*> uiObj;
+
 public:
 	Scene(Scenes type);
 	virtual ~Scene();

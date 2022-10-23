@@ -1,6 +1,7 @@
 #include "DevScene.h"
 #include "../Manager/ResourceMgr.h"
 #include "../Framework/Utils.h"
+#include "../Object/InteractiveObject.h"
 
 DevScene::DevScene()
 	:Scene(Scenes::DevScene)
@@ -13,7 +14,7 @@ DevScene::~DevScene()
 
 void DevScene::Init()
 {
-	mapInfo.Init();
+	mapInfo.Init(this);
 
 	MakeBackground();	
 
@@ -27,13 +28,15 @@ void DevScene::Init()
 			SetTileTex(i, j);
 			drawMap[i][j]->SetPos({ 56.f * (j - i) , 42.f * (j + i)});
 			drawMap[i][j]->SetPos(drawMap[i][j]->GetPos() + startPos);
-			
+						
 			mapInfo.GetTilesInfo(i, j).SetPos(drawMap[i][j]->GetPos());
 
-			drawObject[i][j] = mapInfo.GetTilesInfo(i, j).GetObjList();
-			drawIObject[i][j] = mapInfo.GetTilesInfo(i, j).GetIObjList();
+			objs[i][j] = mapInfo.GetTilesInfo(i, j).GetObjList();
+			actObjs[i][j] = mapInfo.GetTilesInfo(i, j).GetActObjList();
 		}
 	}
+
+	phase = GamePhase::Start;
 }
 
 void DevScene::Release()
@@ -73,12 +76,12 @@ void DevScene::Draw(RenderWindow& window)
 	{
 		for (int j = 0; j < 8; ++j)
 		{
-			for (auto obj : *drawObject[i][j])
+			for (auto obj : *objs[i][j])
 			{
 				if (obj != nullptr && obj->GetActive())
 					obj->Draw(window);
 			}
-			for (auto obj : *drawIObject[i][j])
+			for (auto obj : *actObjs[i][j])
 			{
 				if (obj != nullptr && obj->GetActive())
 					obj->Draw(window);
@@ -118,7 +121,7 @@ void DevScene::SetTileTex(int i, int j)
 		break;
 	default:
 		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
-		break;			
+		break;
 	}
 }
 

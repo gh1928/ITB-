@@ -2,7 +2,7 @@
 #include "../../Framework/Utils.h"
 #include <iostream>
 #include "../../Manager/ResourceMgr.h"
-#include "../../Object/FillStartPos.h"
+#include "../../Scene/Scene.h"
 
 int Tile::tileCount = -1;
 int Tile::mechCount = -1;
@@ -17,30 +17,41 @@ Tile::Tile()
 
 Tile::~Tile()
 {
-	for (auto obj : tObjList)
+	for (auto obj : objList)
 	{
 		if(obj != nullptr)
 			delete obj;	
 	}
-	tObjList.clear();
+	objList.clear();
+
+	for (auto obj : actObjList)
+	{
+		if (obj != nullptr)
+			delete obj;
+	}
+	actObjList.clear();	
 }
 
-void Tile::Init()
+void Tile::Init(Scene* scene)
 {	
+	this->scene = scene;
+
 	if ((1 <= indexI && indexI <= 6) && ( 1 <= indexJ && indexJ <= 3 ))
 	{
 		if (type == TileTypes::Stand || type == TileTypes::Water)			
-			tObjList.push_back(new FillStartPos);
+			objList.push_back(new FillStartPos);
 	}
 
-	tObjList.push_back(new SelectionCheck(isCursor));
+	SetStartObject();
 
-	for (auto obj : tObjList)
+	objList.push_back(new SelectionCheck(isCursor));
+
+	for (auto obj : objList)
 	{
 		obj->Init();
 	}
 
-	for (auto obj : tIObjList)
+	for (auto obj : actObjList)
 	{
 		obj->Init();
 	}
@@ -51,7 +62,7 @@ void Tile::Init()
 void Tile::SetPos(Vector2f pos)
 {
 	position = pos;
-	for (auto obj : tObjList)
+	for (auto obj : objList)
 	{
 		obj->SetPos(position);
 	}		
@@ -62,15 +73,16 @@ void Tile::Update(float dt)
 	if(phase == GamePhase::Start)
 		UpdateStartPhase(dt);
 
-	for (auto obj : tObjList)
+	for (auto obj : objList)
 	{
 		if(obj->GetActive())
 			obj->Update(dt);
 	}
 
-	for (auto obj : tIObjList)
+	for (auto obj : actObjList)
 	{
 		if (obj->GetActive())
+			obj->SetPos(position);
 			obj->Update(dt);
 	}
 }
@@ -83,9 +95,24 @@ void Tile::UpdateStartPhase(float dt)
 			MechDrop();
 	}
 
-	if (!tIObjList.empty())
+	if (!actObjList.empty())
 	{
 
+	}
+}
+
+void Tile::SetStartObject()
+{
+	switch (type)
+	{
+	case TileTypes::Mountain:
+		actObjList.push_back(new Mountain);		
+		break;
+	case TileTypes::Building1:
+		actObjList.push_back(new Building);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -97,16 +124,13 @@ void Tile::MechDrop()
 	switch (++mechCount)
 	{
 	case 0:
-		tIObjList.push_back(new CombatMech);
-		tIObjList.back()->SetPos(position);
+		actObjList.push_back(new CombatMech);		
 		break;
 	case 1:
-		tIObjList.push_back(new CannonMech);
-		tIObjList.back()->SetPos(position);
+		actObjList.push_back(new CannonMech);		
 		break;
 	case 2:
-		tIObjList.push_back(new ArtilleryMech);
-		tIObjList.back()->SetPos(position);
+		actObjList.push_back(new ArtilleryMech);		
 		break;
 	}
 }

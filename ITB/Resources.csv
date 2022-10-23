@@ -3,6 +3,13 @@ graphics/background/bg.png,0
 graphics/background/map_shadow.png,0
 graphics/tiles/ground_0.png,0
 graphics/tiles/water_0.png,0
+graphics/tiles/water_anim.png,0
+graphics/tiles/building_sheet.png,0
+graphics/tiles/building_collapse.png,0
+graphics/tiles/building_1_tile.png,0
+graphics/tiles/mountain_0.png,0
+graphics/tiles/mountain_0_broken.png,0
+graphics/tiles/mountain_explode.png,0
 graphics/tiles/ground_rail.png,0
 graphics/ui/tilesel.png,0
 graphics/ui/setmechpos.png,0

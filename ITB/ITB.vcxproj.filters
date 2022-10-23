@@ -84,6 +84,12 @@
     <ClCompile Include="Object\InteractiveObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Object\StructObject\Mountain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\StructObject\Building.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Const.h">
@@ -165,6 +171,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\InteractiveObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\StructObject\Mountain.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\StructObject\Building.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\GameObjectsHeader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

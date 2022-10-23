@@ -7,15 +7,17 @@
 
 using namespace std;
 
+class Scene;
 class MapInfo
 {
 protected:	
 	array<array<Tile, 8>, 8> mapInfo;	
+	Scene* scene;
 public:
 	MapInfo();
 	~MapInfo();
 
-	void Init();
+	void Init(Scene* scene);
 	Tile& GetTilesInfo(int idx1, int idx2) { return mapInfo[idx1][idx2]; }
 
 	void Update(float dt);
