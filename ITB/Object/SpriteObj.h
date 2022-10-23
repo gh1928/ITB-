@@ -19,5 +19,6 @@ public:
 	virtual void Draw(RenderWindow& window);
 
 	void SetTexture(Texture& tex);
+	Sprite* GetSprite() { return &sprite; }
 };
 

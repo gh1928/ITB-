@@ -52,3 +52,10 @@ enum class GamePhase
 	Playing,
 	End,
 };
+
+enum class AnimationType
+{
+	None = -1,
+	Projectile,
+	Actor,	
+};

@@ -10,9 +10,14 @@ protected:
 	array<Sprite, 82> backGround;	
 
 	array<array<SpriteObj*, 8>, 8> drawMap;
+
 	array<array<list<Object*>*, 8>, 8> objs;
 	array<array<list<InteractiveObject*>*, 8>, 8> actObjs;
-	
+	array<array<list<Object*>*, 8>, 8> uiObjs;
+
+	list<Object*> sceneUi;
+	Vector2f uiULpos;
+
 	MapInfo mapInfo;
 	GamePhase phase;
 public:
@@ -31,5 +36,6 @@ public:
 	void MakeBackground();
 	void SetTileTex(int i, int j);
 
+	void InitStartPhase();
 	void UpdateStartPhase(float dt);
 };

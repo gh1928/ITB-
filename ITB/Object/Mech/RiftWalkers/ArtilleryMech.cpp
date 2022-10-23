@@ -3,10 +3,16 @@
 ArtilleryMech::ArtilleryMech()
 {
 	type = MechClass::Range;
-	SetTexture(*RESOURCE_MGR->GetTexture("graphics/mech/artillery/mech_artillery.png"));
-	sprite.setOrigin(-11.f, 2.f);
+	origin = { -11.f, 2.f };
+	SetAnim();
 }
 
 ArtilleryMech::~ArtilleryMech()
 {
+}
+
+void ArtilleryMech::SetAnim()
+{
+	Mech::SetAnim();
+	animation.SetTexture("graphics/mech/artillery/mech_artillery_a.png", 4);
 }

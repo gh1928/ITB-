@@ -3,9 +3,11 @@
 #include "../Framework/Utils.h"
 #include "../Object/InteractiveObject.h"
 
+
 DevScene::DevScene()
-	:Scene(Scenes::DevScene)
+	:Scene(Scenes::DevScene), uiULpos({15,10})
 {
+	
 }
 
 DevScene::~DevScene()
@@ -33,10 +35,13 @@ void DevScene::Init()
 
 			objs[i][j] = mapInfo.GetTilesInfo(i, j).GetObjList();
 			actObjs[i][j] = mapInfo.GetTilesInfo(i, j).GetActObjList();
+			uiObjs[i][j] = mapInfo.GetTilesInfo(i, j).GetUiObjList();
 		}
 	}
 
 	phase = GamePhase::Start;
+	sceneUi.push_back(new StartPhaseUI);
+	sceneUi.back()->SetPos(uiULpos);
 }
 
 void DevScene::Release()
@@ -54,6 +59,12 @@ void DevScene::Exit()
 void DevScene::Update(float dt)
 {
 	mapInfo.Update(dt);
+
+	for (auto ui : sceneUi)
+	{
+		ui->Update(dt);
+	}
+
 	UpdateStartPhase(dt);
 }
 
@@ -86,7 +97,17 @@ void DevScene::Draw(RenderWindow& window)
 				if (obj != nullptr && obj->GetActive())
 					obj->Draw(window);
 			}
+			for (auto obj : *uiObjs[i][j])
+			{
+				if (obj != nullptr && obj->GetActive())
+					obj->Draw(window);
+			}
 		}
+	}
+
+	for (auto ui : sceneUi)
+	{
+		ui->Draw(window);
 	}
 }
 
@@ -125,6 +146,11 @@ void DevScene::SetTileTex(int i, int j)
 	}
 }
 
+void DevScene::InitStartPhase()
+{
+}
+
 void DevScene::UpdateStartPhase(float dt)
 {
+
 }

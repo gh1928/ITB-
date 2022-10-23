@@ -6,3 +6,6 @@
 
 #include "../Object/FillStartPos.h"
 #include "../Object/SelectionCheck.h"
+#include "../Object/MechDrop.h"
+
+#include "../Object/Ui/StartPhaseUI.h"

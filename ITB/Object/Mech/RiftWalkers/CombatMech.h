@@ -9,6 +9,8 @@ public:
 	CombatMech();
 	virtual ~CombatMech();
 public:
+	virtual void SetAnim();
 
+	virtual void Draw(RenderWindow& window) { SpriteObj::Draw(window); }
 };
 

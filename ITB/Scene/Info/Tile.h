@@ -18,9 +18,13 @@ protected:
 	static int mechCount;
 
 	bool isCursor;
+	bool isSpace;
+	bool mechDroppable;
+	bool deployChecked;
 
 	list<Object*> objList;	
 	list<InteractiveObject*> actObjList;
+	list< Object*> uiObjList;
 
 	TileTypes type;
 
@@ -43,18 +47,18 @@ public:
 	void AddActObject(InteractiveObject* iobj) { actObjList.push_back(iobj); }
 	list<Object*>* GetObjList() { return &objList; }
 	list<InteractiveObject*>* GetActObjList() { return &actObjList; }
+	list<Object*>* GetUiObjList() { return &uiObjList; }
 
 	void Update(float dt);
 
 public:
 	void UpdateStartPhase(float dt);
 	void SetStartObject();
-	void MechDrop();
-	
-	
+	void MechDropEvent();	
 	
 	void SetPhase(GamePhase phase) { this->phase = phase; }	
-	GamePhase GetPhase() { return phase; }
-	
+	GamePhase GetPhase() { return phase; }	
+
+	static int GetMechCount() { return mechCount; }
 };
 

@@ -9,8 +9,7 @@ class Object;
 class Scene
 {
 protected:
-	Scenes type;
-	list<Object*> uiObj;
+	Scenes type;	
 
 public:
 	Scene(Scenes type);

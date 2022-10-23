@@ -1,12 +1,18 @@
 #include "CannonMech.h"
 
 CannonMech::CannonMech()
-{
-	type = MechClass::Brute;
-	SetTexture(*RESOURCE_MGR->GetTexture("graphics/mech/cannon/mech_tank.png"));
-	sprite.setOrigin(-12.f, -7.f);
+{	
+	type = MechClass::Brute;	
+	origin = { -12.f, -7.f };
+	SetAnim();
 }
 
 CannonMech::~CannonMech()
 {
+}
+
+void CannonMech::SetAnim()
+{
+	Mech::SetAnim();	
+	animation.SetTexture("graphics/mech/cannon/mech_tank_a.png", 3);	
 }

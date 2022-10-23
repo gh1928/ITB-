@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\MechDrop.cpp" />
     <ClCompile Include="Object\StructObject\Building.cpp" />
     <ClCompile Include="Object\StructObject\Mountain.cpp" />
     <ClCompile Include="Object\InteractiveObject.cpp" />
@@ -148,7 +149,7 @@
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\DevScene.cpp" />
     <ClCompile Include="Manager\InputMgr.cpp" />
-    <ClCompile Include="Manager\Animator.cpp" />
+    <ClCompile Include="Framework\Animator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Scene\SceneMgr.cpp" />
@@ -157,9 +158,11 @@
     <ClCompile Include="Scene\Info\Tile.cpp" />
     <ClCompile Include="Object\Mech\Weapon.cpp" />
     <ClCompile Include="Object\SelectionCheck.cpp" />
+    <ClCompile Include="Object\Ui\StartPhaseUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\GameObjectsHeader.h" />
+    <ClInclude Include="Object\MechDrop.h" />
     <ClInclude Include="Object\StructObject\Building.h" />
     <ClInclude Include="Object\StructObject\Mountain.h" />
     <ClInclude Include="Object\InteractiveObject.h" />
@@ -178,7 +181,7 @@
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\DevScene.h" />
     <ClInclude Include="Manager\InputMgr.h" />
-    <ClInclude Include="Manager\Animator.h" />
+    <ClInclude Include="Framework\Animator.h" />
     <ClInclude Include="Framework\Const.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Scene\SceneMgr.h" />
@@ -189,6 +192,7 @@
     <ClInclude Include="Object\Mech\Weapon.h" />
     <ClInclude Include="Object\SelectionCheck.h" />
     <ClInclude Include="Framework\Test.h" />
+    <ClInclude Include="Object\Ui\StartPhaseUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

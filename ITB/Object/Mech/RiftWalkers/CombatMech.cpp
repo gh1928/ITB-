@@ -1,12 +1,18 @@
 #include "CombatMech.h"
 
-CombatMech::CombatMech()
-{
+CombatMech::CombatMech()	
+{	
 	type = MechClass::Prime;
-	SetTexture(*RESOURCE_MGR->GetTexture("graphics/mech/combat/mech_punch.png"));
-	sprite.setOrigin(-10.f, 2.f);
+	origin = { -10.f, 2.f };
+	SetAnim();	
 }
 
 CombatMech::~CombatMech()
 {
+}
+
+void CombatMech::SetAnim()
+{
+	Mech::SetAnim();
+	animation.SetTexture("graphics/mech/combat/mech_punch_a.png", 4);
 }

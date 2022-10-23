@@ -7,6 +7,6 @@ public:
 	ArtilleryMech();
 	virtual ~ArtilleryMech();
 public:
-
+	virtual void SetAnim();
 };
 
