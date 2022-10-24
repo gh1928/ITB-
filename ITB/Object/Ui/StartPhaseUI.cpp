@@ -1,9 +1,11 @@
 #include "StartPhaseUI.h"
 #include "../../Scene/Info/Tile.h"
 #include "../../Manager/ResourceMgr.h"
+#include "../../Manager/InputMgr.h"
 
 StartPhaseUI::StartPhaseUI()
-{
+{	
+	checkBox = { 15,105,185,60 };		
 }
 
 StartPhaseUI::~StartPhaseUI()
@@ -32,5 +34,11 @@ void StartPhaseUI::ChangeTex()
 		sprite.setTexture(*RESOURCE_MGR->GetTexture("graphics/ui/startphase/dropriftwalkers/dropartil.png"));		
 		sprite.setTextureRect({ 0, 0, 356, 80 });
 		break;
+	case 3:		
+		sprite.setTexture(
+			checkBox.contains((Vector2i)InputMgr::GetMousePos()) ? 
+			*RESOURCE_MGR->GetTexture("graphics/ui/startphase/dropendcheck.png"): 
+			*RESOURCE_MGR->GetTexture("graphics/ui/startphase/dropend.png"));
+		sprite.setTextureRect({ 0, 0, 300, 155 });
 	}
 }

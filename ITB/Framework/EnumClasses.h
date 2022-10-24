@@ -58,4 +58,5 @@ enum class AnimationType
 	None = -1,
 	Projectile,
 	Actor,	
+	Background,
 };

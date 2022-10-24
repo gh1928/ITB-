@@ -1,6 +1,6 @@
 #pragma once
-#include "SpriteObj.h"
-#include "../Framework/EnumClasses.h"
+#include "../SpriteObj.h"
+#include "../../Framework/EnumClasses.h"
 
 class SelectionCheck : public SpriteObj
 {

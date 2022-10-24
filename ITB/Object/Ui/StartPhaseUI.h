@@ -4,6 +4,8 @@
 class StartPhaseUI : public SpriteObj
 {
 protected:
+	IntRect checkBox;
+
 public:
 	StartPhaseUI();
 	virtual ~StartPhaseUI();

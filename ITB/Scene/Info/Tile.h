@@ -24,7 +24,7 @@ protected:
 
 	list<Object*> objList;	
 	list<InteractiveObject*> actObjList;
-	list< Object*> uiObjList;
+	list<Object*> uiObjList;
 
 	TileTypes type;
 
@@ -60,5 +60,6 @@ public:
 	GamePhase GetPhase() { return phase; }	
 
 	static int GetMechCount() { return mechCount; }
+	//static SetMechCount(int num) 
 };
 

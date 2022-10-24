@@ -9,7 +9,8 @@ class DevScene : public Scene
 protected:
 	array<Sprite, 82> backGround;	
 
-	array<array<SpriteObj*, 8>, 8> drawMap;
+	
+	array<array<list<SpriteObj*>, 8>, 8> drawMap;
 
 	array<array<list<Object*>*, 8>, 8> objs;
 	array<array<list<InteractiveObject*>*, 8>, 8> actObjs;

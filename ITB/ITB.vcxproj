@@ -139,7 +139,7 @@
     <ClCompile Include="Scene\DevScene2.cpp" />
     <ClCompile Include="Object\Mech\RiftWalkers\ArtilleryMech.cpp" />
     <ClCompile Include="Object\Mech\RiftWalkers\CannonMech.cpp" />
-    <ClCompile Include="Object\FillStartPos.cpp" />
+    <ClCompile Include="Object\TileCover\FillStartPos.cpp" />
     <ClCompile Include="Object\Mech\RiftWalkers\CombatMech.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Manager\ResourceMgr.cpp" />
@@ -157,8 +157,9 @@
     <ClCompile Include="Object\Vek\Vek.cpp" />
     <ClCompile Include="Scene\Info\Tile.cpp" />
     <ClCompile Include="Object\Mech\Weapon.cpp" />
-    <ClCompile Include="Object\SelectionCheck.cpp" />
+    <ClCompile Include="Object\TileCover\SelectionCheck.cpp" />
     <ClCompile Include="Object\Ui\StartPhaseUI.cpp" />
+    <ClCompile Include="Object\TileCover\Water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\GameObjectsHeader.h" />
@@ -170,7 +171,7 @@
     <ClInclude Include="Object\Mech\MechHeaders.h" />
     <ClInclude Include="Object\Mech\RiftWalkers\ArtilleryMech.h" />
     <ClInclude Include="Object\Mech\RiftWalkers\CannonMech.h" />
-    <ClInclude Include="Object\FillStartPos.h" />
+    <ClInclude Include="Object\TileCover\FillStartPos.h" />
     <ClInclude Include="Object\Mech\RiftWalkers\CombatMech.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Manager\ResourceMgr.h" />
@@ -190,9 +191,10 @@
     <ClInclude Include="Object\Vek\Vek.h" />
     <ClInclude Include="Scene\Info\Tile.h" />
     <ClInclude Include="Object\Mech\Weapon.h" />
-    <ClInclude Include="Object\SelectionCheck.h" />
+    <ClInclude Include="Object\TileCover\SelectionCheck.h" />
     <ClInclude Include="Framework\Test.h" />
     <ClInclude Include="Object\Ui\StartPhaseUI.h" />
+    <ClInclude Include="Object\TileCover\Water.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

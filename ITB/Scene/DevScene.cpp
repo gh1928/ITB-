@@ -2,6 +2,7 @@
 #include "../Manager/ResourceMgr.h"
 #include "../Framework/Utils.h"
 #include "../Object/InteractiveObject.h"
+#include "../Object/TileCover/Water.h"
 
 
 DevScene::DevScene()
@@ -28,10 +29,13 @@ void DevScene::Init()
 		for (int j = 0; j < 8; ++j)
 		{	
 			SetTileTex(i, j);
-			drawMap[i][j]->SetPos({ 56.f * (j - i) , 42.f * (j + i)});
-			drawMap[i][j]->SetPos(drawMap[i][j]->GetPos() + startPos);
+			for (auto map : drawMap[i][j])
+			{
+				Vector2f pos = { 56.f * (j - i) , 42.f * (j + i) };
+				map->SetPos(pos + startPos);
+			}
 						
-			mapInfo.GetTilesInfo(i, j).SetPos(drawMap[i][j]->GetPos());
+			mapInfo.GetTilesInfo(i, j).SetPos(drawMap[i][j].front()->GetPos());
 
 			objs[i][j] = mapInfo.GetTilesInfo(i, j).GetObjList();
 			actObjs[i][j] = mapInfo.GetTilesInfo(i, j).GetActObjList();
@@ -60,12 +64,26 @@ void DevScene::Update(float dt)
 {
 	mapInfo.Update(dt);
 
+	for (int i = 0; i < 8; ++i)
+	{
+		for (int j = 0; j < 8; ++j)
+		{
+			if (mapInfo.GetTilesInfo(i, j).GetType() == TileTypes::Water)
+			{
+				for (auto map : drawMap[i][j])
+				{
+					map->Update(dt);
+				}
+			}
+		}
+	}
+
 	for (auto ui : sceneUi)
 	{
 		ui->Update(dt);
-	}
+	}	
 
-	UpdateStartPhase(dt);
+	UpdateStartPhase(dt);	
 }
 
 void DevScene::Draw(RenderWindow& window)
@@ -79,7 +97,10 @@ void DevScene::Draw(RenderWindow& window)
 	{
 		for (int j = 0; j < 8; ++j)
 		{
-			drawMap[i][j]->Draw(window);
+			for (auto map : drawMap[i][j])
+			{
+				map->Draw(window);
+			}			
 		}
 	}
 
@@ -128,20 +149,21 @@ void DevScene::MakeBackground()
 
 void DevScene::SetTileTex(int i, int j)
 {
-	drawMap[i][j] = new SpriteObj;
+	drawMap[i][j].push_back(new SpriteObj);
 	switch (mapInfo.GetTilesInfo(i, j).GetType())
 	{
 	case TileTypes::Stand:
-		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
+		drawMap[i][j].back()->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
 		break;
 	case TileTypes::Water:
-		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/water_0.png"));
+		drawMap[i][j].back()->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/water_0.png"));
+		drawMap[i][j].push_back(new Water);		
 		break;
 	case TileTypes::Rail:
-		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_rail.png"));
+		drawMap[i][j].back()->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_rail.png"));
 		break;
 	default:
-		drawMap[i][j]->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
+		drawMap[i][j].back()->SetTexture(*RESOURCE_MGR->GetTexture("graphics/tiles/ground_0.png"));
 		break;
 	}
 }

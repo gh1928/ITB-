@@ -137,6 +137,8 @@ void Tile::SetStartObject()
 {
 	switch (type)
 	{
+	case TileTypes::Water:		
+		break;
 	case TileTypes::Mountain:
 		actObjList.push_back(new Mountain);		
 		break;

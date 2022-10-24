@@ -63,13 +63,13 @@
     <ClCompile Include="Object\Mech\Weapon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\SelectionCheck.cpp">
+    <ClCompile Include="Object\TileCover\SelectionCheck.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Mech\RiftWalkers\CombatMech.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Object\FillStartPos.cpp">
+    <ClCompile Include="Object\TileCover\FillStartPos.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Mech\RiftWalkers\CannonMech.cpp">
@@ -94,6 +94,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Ui\StartPhaseUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TileCover\Water.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +155,7 @@
     <ClInclude Include="Object\Mech\Weapon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\SelectionCheck.h">
+    <ClInclude Include="Object\TileCover\SelectionCheck.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Test.h">
@@ -161,7 +164,7 @@
     <ClInclude Include="Object\Mech\RiftWalkers\CombatMech.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Object\FillStartPos.h">
+    <ClInclude Include="Object\TileCover\FillStartPos.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Mech\RiftWalkers\CannonMech.h">
@@ -192,6 +195,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Ui\StartPhaseUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TileCover\Water.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

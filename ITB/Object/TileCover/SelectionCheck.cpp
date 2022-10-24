@@ -1,5 +1,5 @@
 #include "SelectionCheck.h"
-#include "../Manager/InputMgr.h"
+#include "../../Manager/InputMgr.h"
 
 SelectionCheck::SelectionCheck(bool& isCursor, GamePhase& phase)
 	:isCursor(isCursor), phase(phase)
