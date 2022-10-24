@@ -4,7 +4,7 @@ class ArtilleryMech : public Mech
 {
 protected:
 public:
-	ArtilleryMech();
+	ArtilleryMech(GamePhase& phase);
 	virtual ~ArtilleryMech();
 public:
 	virtual void SetAnim();

@@ -3,7 +3,8 @@
 #include "../../Manager/ResourceMgr.h"
 #include "../../Manager/InputMgr.h"
 
-StartPhaseUI::StartPhaseUI()
+StartPhaseUI::StartPhaseUI(GamePhase& phase)
+	:phase(phase)
 {	
 	checkBox = { 15,105,185,60 };		
 }
@@ -41,4 +42,14 @@ void StartPhaseUI::ChangeTex()
 			*RESOURCE_MGR->GetTexture("graphics/ui/startphase/dropend.png"));
 		sprite.setTextureRect({ 0, 0, 300, 155 });
 	}
+}
+
+void StartPhaseUI::PhaseEnd()
+{
+	if ((Tile::GetMechCount() == 2)
+		&& checkBox.contains((Vector2i)InputMgr::GetMousePos())
+		&& InputMgr::GetMouseButtonDown(Mouse::Left))
+	{
+		phase = GamePhase::Deploy;
+	}		
 }

@@ -49,6 +49,7 @@ enum class GamePhase
 {
 	None = -1,
 	Start,
+	Deploy,
 	Playing,
 	End,
 };

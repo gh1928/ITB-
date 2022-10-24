@@ -1,9 +1,11 @@
 #include "CannonMech.h"
 
-CannonMech::CannonMech()
+CannonMech::CannonMech(GamePhase& phase)
+	:Mech(phase)
 {	
 	type = MechClass::Brute;	
-	origin = { -12.f, -7.f };
+	origin = { -12.f, 30.f - 7.f };
+	//origin = { -12.f, -7.f };
 	SetAnim();
 }
 

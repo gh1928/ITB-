@@ -8,12 +8,15 @@ class Mech : public InteractiveObject
 protected:
 	MechClass type;
 	int move;
+	GamePhase& phase;
 
 	IntRect texRect;
 	Vector2f origin;
 
 	Animator animation;
+
 public:	
+	Mech(GamePhase& phase) :phase(phase){}
 	virtual ~Mech(){}
 
 	virtual void SetAnim();

@@ -6,7 +6,7 @@ class CombatMech : public Mech
 protected:
 
 public:
-	CombatMech();
+	CombatMech(GamePhase& phase);
 	virtual ~CombatMech();
 public:
 	virtual void SetAnim();

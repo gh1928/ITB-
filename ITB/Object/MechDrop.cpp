@@ -43,9 +43,6 @@ void MechDrop::SetPos(const Vector2f& pos)
 
 void MechDrop::Draw(RenderWindow& window)
 {
-	if (Tile::GetMechCount() >= 2)
-		return;
-
 	mechDroppable ? window.draw(deployArrow) : window.draw(deployXmark);
 	
 	mechOutline.setColor(Color(255, mechDroppable ? 255 : 0, 0));
@@ -61,6 +58,9 @@ void MechDrop::SetTex(Sprite* sprite, String id)
 
 void MechDrop::SetSprites()
 {
+	if (Tile::GetMechCount() >= 2)
+		return;
+
 	SetTex(&deployArrow, "graphics/ui/startphase/deployment_arrow.png");
 	deployArrow.setColor(Color(255, 255, 0));
 

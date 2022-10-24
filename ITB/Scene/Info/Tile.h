@@ -30,12 +30,12 @@ protected:
 
 	Vector2f position;
 
-	GamePhase phase;
+	GamePhase* phase;
 public:
 	Tile();
 	~Tile();
 public:
-	void Init(Scene* scene);
+	void Init(Scene* scene, GamePhase* phase);
 
 	void SetType(TileTypes type) { this->type = type; }
 	TileTypes GetType() { return type; }
@@ -56,8 +56,8 @@ public:
 	void SetStartObject();
 	void MechDropEvent();	
 	
-	void SetPhase(GamePhase phase) { this->phase = phase; }	
-	GamePhase GetPhase() { return phase; }	
+	void SetPhase(GamePhase phase) { *this->phase = phase; }	
+	GamePhase GetPhase() { return *phase; }	
 
 	static int GetMechCount() { return mechCount; }
 	//static SetMechCount(int num) 

@@ -1,9 +1,11 @@
 #include "ArtilleryMech.h"
 
-ArtilleryMech::ArtilleryMech()
+ArtilleryMech::ArtilleryMech(GamePhase& phase)
+	:Mech(phase)
 {
 	type = MechClass::Range;
-	origin = { -11.f, 2.f };
+	origin = { -11.f, 30.f + 2.f };
+	//origin = { -11.f, 2.f };
 	SetAnim();
 }
 

@@ -5,7 +5,7 @@
 
 
 int main()
-{
+{    
     FRAMEWORK->Init(WINDOW_WIDTH, WINDOW_HEIGHT);
     FRAMEWORK->Do();
     return 0;

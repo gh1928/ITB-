@@ -13,11 +13,13 @@ class MapInfo
 protected:	
 	array<array<Tile, 8>, 8> mapInfo;	
 	Scene* scene;
+
+	GamePhase* phase;
 public:
 	MapInfo();
 	~MapInfo();
 
-	void Init(Scene* scene);
+	void Init(Scene* scene, GamePhase* phase);
 	Tile& GetTilesInfo(int idx1, int idx2) { return mapInfo[idx1][idx2]; }
 
 	void Update(float dt);

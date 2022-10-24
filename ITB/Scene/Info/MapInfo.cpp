@@ -11,9 +11,10 @@ MapInfo::~MapInfo()
 {
 }
 
-void MapInfo::Init(Scene* scene)
+void MapInfo::Init(Scene* scene, GamePhase* phase)
 {
 	this->scene = scene;
+	this->phase = phase;
 	ifstream is("stage/stage01.txt");
 	char number;
 
@@ -24,7 +25,7 @@ void MapInfo::Init(Scene* scene)
 			is >> number;
 
 			mapInfo[i][j].SetType((TileTypes)atoi(&number));
-			mapInfo[i][j].Init(this->scene);
+			mapInfo[i][j].Init(this->scene, this->phase);
 		}
 	}	
 }

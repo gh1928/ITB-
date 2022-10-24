@@ -17,7 +17,9 @@ DevScene::~DevScene()
 
 void DevScene::Init()
 {
-	mapInfo.Init(this);
+	FRAMEWORK->GetWindow().setMouseCursorVisible(false);
+	phase = GamePhase::Start;
+	mapInfo.Init(this, &phase);
 
 	MakeBackground();	
 
@@ -43,9 +45,10 @@ void DevScene::Init()
 		}
 	}
 
-	phase = GamePhase::Start;
-	sceneUi.push_back(new StartPhaseUI);
+	
+	sceneUi.push_back(new StartPhaseUI(phase));
 	sceneUi.back()->SetPos(uiULpos);
+	sceneUi.push_back(new MouseUi);
 }
 
 void DevScene::Release()

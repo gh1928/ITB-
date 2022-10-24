@@ -1,9 +1,11 @@
 #include "CombatMech.h"
 
-CombatMech::CombatMech()	
+CombatMech::CombatMech(GamePhase& phase)
+	:Mech(phase)
 {	
 	type = MechClass::Prime;
-	origin = { -10.f, 2.f };
+	origin = { -10.f, 30.f + 2.f };
+	//origin = { -10.f, 2.f };
 	SetAnim();	
 }
 

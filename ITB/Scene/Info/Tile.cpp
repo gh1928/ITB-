@@ -32,9 +32,10 @@ Tile::~Tile()
 	actObjList.clear();	
 }
 
-void Tile::Init(Scene* scene)
+void Tile::Init(Scene* scene, GamePhase* phase)
 {	
 	this->scene = scene;
+	this->phase = phase;
 	deployChecked = false;
 
 	if ((1 <= indexI && indexI <= 6) && (1 <= indexJ && indexJ <= 3))
@@ -46,7 +47,7 @@ void Tile::Init(Scene* scene)
 
 	SetStartObject();
 
-	objList.push_back(new SelectionCheck(isCursor, phase));
+	objList.push_back(new SelectionCheck(isCursor, *this->phase));
 	
 	for (auto obj : objList)
 	{
@@ -56,9 +57,7 @@ void Tile::Init(Scene* scene)
 	for (auto obj : actObjList)
 	{
 		obj->Init();
-	}
-
-	phase = GamePhase::Start;
+	}	
 }
 
 void Tile::SetPos(Vector2f pos)
@@ -100,7 +99,7 @@ void Tile::Update(float dt)
 
 void Tile::UpdateStartPhase(float dt)
 {
-	if (phase != GamePhase::Start)
+	if (*phase != GamePhase::Start)
 		return;	
 
 	mechDroppable =
@@ -158,14 +157,14 @@ void Tile::MechDropEvent()
 	switch (++mechCount)
 	{
 	case 0:
-		actObjList.push_back(new CombatMech);		
+		actObjList.push_back(new CombatMech(*phase));		
 		break;
 	case 1:
-		actObjList.push_back(new CannonMech);		
+		actObjList.push_back(new CannonMech(*phase));
 		break;
 	case 2:
-		actObjList.push_back(new ArtilleryMech);		
+		actObjList.push_back(new ArtilleryMech(*phase));
 		break;
 	}
-	actObjList.back()->SetActive(true);
+	actObjList.back()->SetActive(false);
 }
