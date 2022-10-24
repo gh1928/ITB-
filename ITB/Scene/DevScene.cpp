@@ -6,7 +6,8 @@
 
 
 DevScene::DevScene()
-	:Scene(Scenes::DevScene), uiULpos({15,10})
+	:Scene(Scenes::DevScene), uiULpos({ 15,10 }), uiMidPos({ WINDOW_WIDTH * 0.5f,WINDOW_HEIGHT * 0.5f }),
+	uiTimer(0.f)
 {
 	
 }
@@ -20,6 +21,8 @@ void DevScene::Init()
 	FRAMEWORK->GetWindow().setMouseCursorVisible(false);
 	phase = GamePhase::Start;
 	mapInfo.Init(this, &phase);
+	isPhaseStart = true;
+	isNewPhase = true;
 
 	MakeBackground();	
 
@@ -42,12 +45,14 @@ void DevScene::Init()
 			objs[i][j] = mapInfo.GetTilesInfo(i, j).GetObjList();
 			actObjs[i][j] = mapInfo.GetTilesInfo(i, j).GetActObjList();
 			uiObjs[i][j] = mapInfo.GetTilesInfo(i, j).GetUiObjList();
+			mechs[i][j] = mapInfo.GetTilesInfo(i, j).GetMechList();
+			veks[i][j] = mapInfo.GetTilesInfo(i, j).GetVeckList();
 		}
 	}
-
-	
+		
 	sceneUi.push_back(new StartPhaseUI(phase));
 	sceneUi.back()->SetPos(uiULpos);
+
 	sceneUi.push_back(new MouseUi);
 }
 
@@ -65,6 +70,7 @@ void DevScene::Exit()
 
 void DevScene::Update(float dt)
 {
+	uiTimer -= dt;
 	mapInfo.Update(dt);
 
 	for (int i = 0; i < 8; ++i)
@@ -83,10 +89,12 @@ void DevScene::Update(float dt)
 
 	for (auto ui : sceneUi)
 	{
-		ui->Update(dt);
+		if(ui->GetActive())
+			ui->Update(dt);		
 	}	
 
-	UpdateStartPhase(dt);	
+	UpdateStartPhase(dt);
+	UpdatePlayerPhase(dt);
 }
 
 void DevScene::Draw(RenderWindow& window)
@@ -126,12 +134,23 @@ void DevScene::Draw(RenderWindow& window)
 				if (obj != nullptr && obj->GetActive())
 					obj->Draw(window);
 			}
+			for (auto obj : *mechs[i][j])
+			{
+				if (obj != nullptr && obj->GetActive())
+					obj->Draw(window);
+			}
+			for (auto obj : *veks[i][j])
+			{
+				if (obj != nullptr && obj->GetActive())
+					obj->Draw(window);
+			}
 		}
 	}
 
 	for (auto ui : sceneUi)
 	{
-		ui->Draw(window);
+		if (ui->GetActive())
+			ui->Draw(window);		
 	}
 }
 
@@ -177,5 +196,32 @@ void DevScene::InitStartPhase()
 
 void DevScene::UpdateStartPhase(float dt)
 {
+	if (phase != GamePhase::Start)
+		return;
 
+}
+
+void DevScene::UpdatePlayerPhase(float dt)
+{
+	if (phase != GamePhase::Player)
+		return;
+
+	if (isNewPhase)
+	{
+		delete sceneUi.front();
+		sceneUi.pop_front();
+		sceneUi.push_front(new MiddleBar(phase));
+		sceneUi.front()->SetPos(uiMidPos);
+		isNewPhase = false;
+	}
+
+	if (isPhaseStart)
+	{
+		uiTimer = 1.f;
+		sceneUi.front()->SetActive(true);
+		isPhaseStart = false;
+	}
+
+	if (uiTimer < 0.f)
+		sceneUi.front()->SetActive(false);
 }

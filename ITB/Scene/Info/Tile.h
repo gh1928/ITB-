@@ -7,10 +7,14 @@
 #include "../../Framework/GameObjectsHeader.h"
 
 class Scene;
+class MapInfo;
+
 class Tile
 {
 protected:	
 	Scene* scene;
+	MapInfo* mapInfo;
+
 	static int tileCount;	
 	int indexI;
 	int indexJ;
@@ -18,24 +22,37 @@ protected:
 	static int mechCount;
 
 	bool isCursor;
-	bool isSpace;
+	bool isMechSpace;
+	bool isVekSpace;
+
 	bool mechDroppable;
-	bool deployChecked;
+	bool deployChecked;	
 
 	list<Object*> objList;	
 	list<InteractiveObject*> actObjList;
 	list<Object*> uiObjList;
+
+	list<Mech*> mechList;
+	list<Vek*> vekList;
+	
+
+	array<Object*, 3>* squd;
 
 	TileTypes type;
 
 	Vector2f position;
 
 	GamePhase* phase;
+
+	bool upNode;
+	bool lfNode;
+	bool rtNode;
+	bool dnNode;
 public:
 	Tile();
 	~Tile();
 public:
-	void Init(Scene* scene, GamePhase* phase);
+	void Init(Scene* scene, MapInfo* mapInfo);
 
 	void SetType(TileTypes type) { this->type = type; }
 	TileTypes GetType() { return type; }
@@ -49,17 +66,29 @@ public:
 	list<InteractiveObject*>* GetActObjList() { return &actObjList; }
 	list<Object*>* GetUiObjList() { return &uiObjList; }
 
+	list<Mech*>* GetMechList() { return &mechList; }
+	list<Vek*>* GetVeckList() { return &vekList; }
+
 	void Update(float dt);
+	void ObjUpdate(float dt);
 
 public:
-	void UpdateStartPhase(float dt);
+	void UpdateStartPhase(float dt);	
+	void UpdateDeployPhase(float dt);
 	void SetStartObject();
 	void MechDropEvent();	
 	
 	void SetPhase(GamePhase phase) { *this->phase = phase; }	
 	GamePhase GetPhase() { return *phase; }	
 
-	static int GetMechCount() { return mechCount; }
-	//static SetMechCount(int num) 
+	static int GetMechCount() { return mechCount; }	
+	bool IsSpace() { return isMechSpace; }
+	
+	void UpNodeUpdate();
+	void LNodeUpdate();
+	void RNodeUpdate();
+	void DnNodeUpdate();
+
+	void UpdateNode();
 };
 

@@ -9,5 +9,8 @@ public:
 	virtual ~CannonMech();
 public:
 	virtual void SetAnim();
+
+	virtual void Update(float dt);
+	virtual void DeployPhaseUpdate(float dt);
 };
 

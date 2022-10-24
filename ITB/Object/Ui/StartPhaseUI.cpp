@@ -46,10 +46,16 @@ void StartPhaseUI::ChangeTex()
 
 void StartPhaseUI::PhaseEnd()
 {
-	if ((Tile::GetMechCount() == 2)
+	if ((Tile::GetMechCount() >= 2)
 		&& checkBox.contains((Vector2i)InputMgr::GetMousePos())
 		&& InputMgr::GetMouseButtonDown(Mouse::Left))
 	{
 		phase = GamePhase::Deploy;
+		enabled = false;
 	}		
+}
+
+void StartPhaseUI::Update(float dt)
+{
+	PhaseEnd();
 }

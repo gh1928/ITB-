@@ -1,5 +1,11 @@
 #include "Mech.h"
 
+Mech::Mech(GamePhase& phase)
+	:phase(phase)
+{
+	actorType = ActorType::Mech;
+}
+
 void Mech::SetAnim()
 {
 	animation.SetSpriteObj(this, AnimationType::Actor);
@@ -9,5 +15,11 @@ void Mech::SetAnim()
 
 void Mech::Update(float dt)
 {
-	animation.UpdateAnimation(dt);
+	animation.UpdateAnimation(dt);	
+}
+
+void Mech::DeployPhaseUpdate(float dt)
+{
+	if (phase != GamePhase::Deploy)
+		return;	
 }

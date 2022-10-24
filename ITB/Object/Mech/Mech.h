@@ -16,10 +16,11 @@ protected:
 	Animator animation;
 
 public:	
-	Mech(GamePhase& phase) :phase(phase){}
+	Mech(GamePhase& phase);
 	virtual ~Mech(){}
 
 	virtual void SetAnim();
 	virtual void Update(float dt);
+	virtual void DeployPhaseUpdate(float dt);
 };
 

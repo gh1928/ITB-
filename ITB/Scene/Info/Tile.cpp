@@ -3,14 +3,14 @@
 #include <iostream>
 #include "../../Manager/ResourceMgr.h"
 #include "../../Scene/Scene.h"
-
+#include "../Info/MapInfo.h"
 int Tile::tileCount = -1;
 int Tile::mechCount = -1;
 
 Tile::Tile()
 {
 	tileCount += 1;
-	int index = tileCount % 64;	
+	int index = tileCount % 64;
 	indexI = index / 8;
 	indexJ = index % 8;
 }
@@ -32,18 +32,19 @@ Tile::~Tile()
 	actObjList.clear();	
 }
 
-void Tile::Init(Scene* scene, GamePhase* phase)
+void Tile::Init(Scene* scene, MapInfo* mapInfo)
 {	
 	this->scene = scene;
-	this->phase = phase;
+	this->mapInfo = mapInfo;	
+	this->phase = this->mapInfo->GetPhase();
+	
 	deployChecked = false;
 
 	if ((1 <= indexI && indexI <= 6) && (1 <= indexJ && indexJ <= 3))
 	{
 		if (type == TileTypes::Stand || type == TileTypes::Water)
 			objList.push_back(new FillStartPos);
-	}
-		
+	}		
 
 	SetStartObject();
 
@@ -71,13 +72,21 @@ void Tile::SetPos(Vector2f pos)
 
 void Tile::Update(float dt)
 {	
-	isSpace = actObjList.empty() ? true : false;
+	isMechSpace = actObjList.empty() ? true : false;	
+
+	//UpdateNode();
 
 	UpdateStartPhase(dt);		
+	UpdateDeployPhase(dt);
 
+	ObjUpdate(dt);
+}
+
+void Tile::ObjUpdate(float dt)
+{
 	for (auto obj : objList)
 	{
-		if(obj->GetActive())
+		if (obj->GetActive())
 			obj->Update(dt);
 	}
 
@@ -95,6 +104,20 @@ void Tile::Update(float dt)
 		if (obj->GetActive())
 			obj->Update(dt);
 	}
+
+	for (auto obj : mechList)
+	{
+		if (obj->GetActive())
+			obj->SetPos(position);
+			obj->Update(dt);
+	}
+
+	for (auto obj : vekList)
+	{
+		if (obj->GetActive())
+			obj->SetPos(position);
+			obj->Update(dt);
+	}
 }
 
 void Tile::UpdateStartPhase(float dt)
@@ -105,7 +128,7 @@ void Tile::UpdateStartPhase(float dt)
 	mechDroppable =
 		      ((1 <= indexI && indexI <= 6)
 			&& (1 <= indexJ && indexJ <= 3)
-			&& isSpace) ? true : false;	
+			&& isMechSpace) ? true : false;	
 
 	if (isCursor && !deployChecked)
 	{		
@@ -130,6 +153,19 @@ void Tile::UpdateStartPhase(float dt)
 			MechDropEvent();
 		}
 	}
+}
+
+void Tile::UpdateDeployPhase(float dt)
+{
+	if (*phase != GamePhase::Deploy)
+		return;
+
+	for (auto ptr : uiObjList)
+	{
+		if (ptr != nullptr)
+			delete ptr;
+	}
+	uiObjList.clear();
 }
 
 void Tile::SetStartObject()
@@ -157,14 +193,43 @@ void Tile::MechDropEvent()
 	switch (++mechCount)
 	{
 	case 0:
-		actObjList.push_back(new CombatMech(*phase));		
+		mechList.push_back(mapInfo->GetSqud(0));
 		break;
 	case 1:
-		actObjList.push_back(new CannonMech(*phase));
+		mechList.push_back(mapInfo->GetSqud(1));
 		break;
 	case 2:
-		actObjList.push_back(new ArtilleryMech(*phase));
+		mechList.push_back(mapInfo->GetSqud(2));
 		break;
 	}
-	actObjList.back()->SetActive(false);
+	mechList.back()->SetActive(false);
+}
+
+
+void Tile::UpNodeUpdate()
+{	
+	upNode = mapInfo->TileSpace(indexI, indexJ - 1);
+}
+
+void Tile::LNodeUpdate()
+{	
+	lfNode = mapInfo->TileSpace(indexI + 1, indexJ);
+}
+
+void Tile::RNodeUpdate()
+{
+	rtNode = mapInfo->TileSpace(indexI - 1, indexJ);
+}
+
+void Tile::DnNodeUpdate()
+{
+	dnNode = mapInfo->TileSpace(indexI, indexJ + 1);
+}
+
+void Tile::UpdateNode()
+{
+	UpNodeUpdate();
+	LNodeUpdate();
+	RNodeUpdate();
+	DnNodeUpdate();
 }

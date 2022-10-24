@@ -45,12 +45,21 @@ enum class MechClass
 	Range,
 };
 
+enum class ActorType
+{
+	None = -1,
+	Mech = 0,
+	Veck = 1,
+};
+
+
 enum class GamePhase
 {
 	None = -1,
 	Start,
 	Deploy,
-	Playing,
+	Player,
+	Enemy,
 	End,
 };
 

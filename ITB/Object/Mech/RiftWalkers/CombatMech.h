@@ -11,6 +11,7 @@ public:
 public:
 	virtual void SetAnim();
 
-	virtual void Draw(RenderWindow& window) { SpriteObj::Draw(window); }
+	virtual void Update(float dt);
+	virtual void DeployPhaseUpdate(float dt);	
 };
 

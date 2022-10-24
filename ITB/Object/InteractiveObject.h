@@ -3,9 +3,12 @@
 class InteractiveObject : public SpriteObj
 {
 protected:
+    ActorType actorType;
     int maxHp;
     int hp;
 public:
-    InteractiveObject(){};
-    ~InteractiveObject(){};
+    InteractiveObject(){}
+    ~InteractiveObject(){}
+
+    virtual ActorType GetActorType() { return actorType; }
 };

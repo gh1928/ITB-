@@ -12,3 +12,7 @@
 
 #include "../Object/Ui/StartPhaseUI.h"
 #include "../Object/Ui/MouseUi.h"
+#include "../Object/Ui/MiddleBar.h"
+
+#include "../Object/Mech/Mech.h"
+#include "../Object/Vek/Vek.h"

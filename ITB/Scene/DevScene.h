@@ -14,13 +14,22 @@ protected:
 
 	array<array<list<Object*>*, 8>, 8> objs;
 	array<array<list<InteractiveObject*>*, 8>, 8> actObjs;
-	array<array<list<Object*>*, 8>, 8> uiObjs;
+	array<array<list<Object*>*, 8>, 8> uiObjs;	
+
+	array<array<list<Mech*>*, 8>, 8> mechs;
+	array<array<list<Vek*>*, 8>, 8> veks;
+
 
 	list<Object*> sceneUi;
 	Vector2f uiULpos;
+	Vector2f uiMidPos;
 
 	MapInfo mapInfo;
 	GamePhase phase;
+
+	bool isNewPhase;
+	bool isPhaseStart;
+	float uiTimer;
 public:
 	DevScene();
 	virtual ~DevScene();
@@ -39,4 +48,5 @@ public:
 
 	void InitStartPhase();
 	void UpdateStartPhase(float dt);
+	void UpdatePlayerPhase(float dt);
 };
