@@ -30,6 +30,27 @@ Tile::~Tile()
 			delete obj;
 	}
 	actObjList.clear();	
+
+	for (auto obj : uiObjList)
+	{
+		if (obj != nullptr)
+			delete obj;
+	}
+	uiObjList.clear();
+
+	for (auto obj : mechList)
+	{
+		if (obj != nullptr)
+			delete obj;
+	}
+	mechList.clear();
+
+	for (auto obj : vekList)
+	{
+		if (obj != nullptr)
+			delete obj;
+	}
+	vekList.clear();
 }
 
 void Tile::Init(Scene* scene, MapInfo* mapInfo)
@@ -43,8 +64,8 @@ void Tile::Init(Scene* scene, MapInfo* mapInfo)
 	if ((1 <= indexI && indexI <= 6) && (1 <= indexJ && indexJ <= 3))
 	{
 		if (type == TileTypes::Stand || type == TileTypes::Water)
-			objList.push_back(new FillStartPos);
-	}		
+			uiObjList.push_back(new FillStartPos);		
+	}
 
 	SetStartObject();
 
@@ -58,7 +79,7 @@ void Tile::Init(Scene* scene, MapInfo* mapInfo)
 	for (auto obj : actObjList)
 	{
 		obj->Init();
-	}	
+	}
 }
 
 void Tile::SetPos(Vector2f pos)
@@ -108,20 +129,32 @@ void Tile::ObjUpdate(float dt)
 	for (auto obj : mechList)
 	{
 		if (obj->GetActive())
+		{
+			if (*phase == GamePhase::Deploy)
+				continue;
 			obj->SetPos(position);
+
 			obj->Update(dt);
+		}
 	}
 
 	for (auto obj : vekList)
 	{
 		if (obj->GetActive())
+		{
 			obj->SetPos(position);
 			obj->Update(dt);
+		}
 	}
 }
 
 void Tile::UpdateStartPhase(float dt)
 {
+	for (auto ui : uiObjList)
+	{
+		uiObjList.back()->SetPos(position);
+	}
+
 	if (*phase != GamePhase::Start)
 		return;	
 
@@ -132,8 +165,7 @@ void Tile::UpdateStartPhase(float dt)
 
 	if (isCursor && !deployChecked)
 	{		
-		uiObjList.push_back(new MechDrop(mechDroppable));
-		uiObjList.back()->SetPos(position);
+		uiObjList.push_back(new MechDrop(mechDroppable));		
 		deployChecked = true;
 	}
 
@@ -159,6 +191,23 @@ void Tile::UpdateDeployPhase(float dt)
 {
 	if (*phase != GamePhase::Deploy)
 		return;
+
+	Vector2f trans = { 0, 400.f };
+
+	for (auto obj : mechList)
+	{
+		if (obj->GetActive())
+		{
+			obj->Update(dt);
+			if (obj->GetPos() == position)
+				continue;
+			{
+				obj->SetPos(obj->GetPos() + trans * dt);
+				if (obj->GetPos().y > position.y)
+					obj->SetPos(position);
+			}			
+		}
+	}
 
 	for (auto ptr : uiObjList)
 	{
@@ -190,16 +239,21 @@ void Tile::MechDropEvent()
 	if (mechCount >= 2)
 		return;
 
+	Vector2f beforeDeploy = { 0, -100.f };
+
 	switch (++mechCount)
 	{
 	case 0:
 		mechList.push_back(mapInfo->GetSqud(0));
+		mechList.back()->SetPos(position + beforeDeploy);
 		break;
 	case 1:
 		mechList.push_back(mapInfo->GetSqud(1));
+		mechList.back()->SetPos(position + beforeDeploy);
 		break;
 	case 2:
 		mechList.push_back(mapInfo->GetSqud(2));
+		mechList.back()->SetPos(position + beforeDeploy);
 		break;
 	}
 	mechList.back()->SetActive(false);

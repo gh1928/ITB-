@@ -4,8 +4,10 @@ ArtilleryMech::ArtilleryMech(GamePhase& phase)
 	:Mech(phase)
 {
 	type = MechClass::Range;
-	origin = { -11.f, 30.f + 2.f };
-	phaseTrigger = 0.5f;
+	origin = { -11.f, 2.f };
+	phaseTrigger = 1.f;
+	animation.SetOrigin(origin);
+
 	SetAnim();
 }
 
@@ -27,21 +29,11 @@ void ArtilleryMech::Update(float dt)
 
 void ArtilleryMech::DeployPhaseUpdate(float dt)
 {
-
 	if (phase != GamePhase::Deploy)
 		return;
 
-	animation.SetOrigin(origin);
-
-	if (origin.y == 2.f)
-		phaseTrigger -= dt;
+	phaseTrigger -= dt;
 
 	if (phaseTrigger < 0)
 		phase = GamePhase::Player;		
-
-	Vector2f trans = { 0, -dt * 40.f };
-	
-	origin += trans;
-	if (origin.y < 2.f)
-		origin = { -11.f, 2.f };
 }

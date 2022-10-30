@@ -4,8 +4,9 @@ CannonMech::CannonMech(GamePhase& phase)
 	:Mech(phase)
 {	
 	type = MechClass::Brute;	
-	origin = { -12.f, 30.f - 7.f };
-	
+	origin = { -12.f, - 7.f };
+	animation.SetOrigin(origin);
+
 	SetAnim();
 }
 
@@ -29,14 +30,4 @@ void CannonMech::DeployPhaseUpdate(float dt)
 {
 	if (phase != GamePhase::Deploy)
 		return;
-
-	animation.SetOrigin(origin);
-
-	if (origin.y == -7.f)
-		return;
-
-	Vector2f trans = { 0, -dt * 80.f };
-	origin += trans;
-	if (origin.y < -7.f)
-		origin = { -12.f, -7.f };
 }

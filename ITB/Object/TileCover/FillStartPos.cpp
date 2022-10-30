@@ -3,6 +3,7 @@
 FillStartPos::FillStartPos()
 {	
 	SetTexture(*RESOURCE_MGR->GetTexture("graphics/ui/setmechpos.png"));
+	enabled = true;
 }
 
 void FillStartPos::Init()

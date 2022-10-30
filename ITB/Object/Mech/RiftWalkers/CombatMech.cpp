@@ -4,7 +4,8 @@ CombatMech::CombatMech(GamePhase& phase)
 	:Mech(phase)
 {	
 	type = MechClass::Prime;
-	origin = { -10.f, 30.f + 2.f };
+	origin = { -10.f, 2.f };
+	animation.SetOrigin(origin);
 	
 	SetAnim();		
 }
@@ -29,14 +30,4 @@ void CombatMech::DeployPhaseUpdate(float dt)
 {
 	if (phase != GamePhase::Deploy)
 		return;
-
-	animation.SetOrigin(origin);
-
-	if (origin.y == 2.f)
-		return;
-
-	Vector2f trans = { 0, -dt * 60.f };
-	origin += trans;
-	if (origin.y < 2.f)
-		origin = { -10.f, 2.f };
 }
