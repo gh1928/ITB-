@@ -8,5 +8,7 @@ public:
 	~MouseUi();
 
 	virtual void Update(float dt);
+public:
+	void ChangeTex();
 };
 

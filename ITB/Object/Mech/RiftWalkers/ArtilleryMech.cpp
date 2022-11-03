@@ -7,6 +7,7 @@ ArtilleryMech::ArtilleryMech(GamePhase& phase)
 	origin = { -11.f, 2.f };
 	phaseTrigger = 1.f;
 	animation.SetOrigin(origin);
+	move = 3;
 
 	SetAnim();
 }

@@ -6,6 +6,7 @@ CombatMech::CombatMech(GamePhase& phase)
 	type = MechClass::Prime;
 	origin = { -10.f, 2.f };
 	animation.SetOrigin(origin);
+	move = 3;
 	
 	SetAnim();		
 }

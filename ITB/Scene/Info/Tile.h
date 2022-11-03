@@ -19,11 +19,17 @@ protected:
 	int indexI;
 	int indexJ;
 
+	int nodeInfo;
+
 	static int mechCount;
 
 	bool isCursor;
+	
+
 	bool isMechSpace;
 	bool isVekSpace;
+
+	bool* chekingObject;
 
 	bool mechDroppable;
 	bool deployChecked;	
@@ -33,8 +39,7 @@ protected:
 	list<Object*> uiObjList;
 
 	list<Mech*> mechList;
-	list<Vek*> vekList;
-	
+	list<Vek*> vekList;	
 
 	array<Object*, 3>* squd;
 
@@ -44,10 +49,6 @@ protected:
 
 	GamePhase* phase;
 
-	bool upNode;
-	bool lfNode;
-	bool rtNode;
-	bool dnNode;
 public:
 	Tile();
 	~Tile();
@@ -75,6 +76,9 @@ public:
 public:
 	void UpdateStartPhase(float dt);	
 	void UpdateDeployPhase(float dt);
+	void UpdatePlayerPhase(float dt);
+	void UpdateMovePhase(float dt);
+
 	void SetStartObject();
 	void MechDropEvent();	
 	
@@ -82,13 +86,13 @@ public:
 	GamePhase GetPhase() { return *phase; }	
 
 	static int GetMechCount() { return mechCount; }	
-	bool IsSpace() { return isMechSpace; }
-	
-	void UpNodeUpdate();
-	void LNodeUpdate();
-	void RNodeUpdate();
-	void DnNodeUpdate();
+	bool IsMechSpace() { return isMechSpace; }
+	bool IsCursor() { return isCursor; }
 
-	void UpdateNode();
+	void SetNodeInfo(int n) { nodeInfo = n; }
+	int GetNodeInfo() { return nodeInfo; }
+
+	void ShowMovePos();
+	void FloodFill(int i, int j, int move);
 };
 

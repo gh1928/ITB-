@@ -6,6 +6,7 @@ CannonMech::CannonMech(GamePhase& phase)
 	type = MechClass::Brute;	
 	origin = { -12.f, - 7.f };
 	animation.SetOrigin(origin);
+	move = 3;
 
 	SetAnim();
 }

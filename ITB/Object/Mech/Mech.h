@@ -21,6 +21,8 @@ public:
 
 	virtual void SetAnim();
 	virtual void Update(float dt);
+public:
 	virtual void DeployPhaseUpdate(float dt);
+	virtual int GetMove() { return move; }
 };
 

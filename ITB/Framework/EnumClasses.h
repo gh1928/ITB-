@@ -59,6 +59,7 @@ enum class GamePhase
 	Start,
 	Deploy,
 	Player,
+	Move,
 	Enemy,
 	End,
 };

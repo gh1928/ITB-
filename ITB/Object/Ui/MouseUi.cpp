@@ -15,3 +15,8 @@ void MouseUi::Update(float dt)
 {
 	SetPos(InputMgr::GetMousePos());
 }
+
+void MouseUi::ChangeTex()
+{
+	sprite.setTexture(*RESOURCE_MGR->GetTexture("graphics/ui/mouse/pointer_move.png"));
+}

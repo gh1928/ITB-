@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\TileCover\MoveCheck.cpp" />
     <ClCompile Include="Object\Ui\MiddleBar.cpp" />
     <ClCompile Include="Object\Ui\MouseUi.cpp" />
     <ClCompile Include="Object\MechDrop.cpp" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\GameObjectsHeader.h" />
+    <ClInclude Include="Object\TileCover\MoveCheck.h" />
     <ClInclude Include="Object\Ui\MiddleBar.h" />
     <ClInclude Include="Object\Ui\MouseUi.h" />
     <ClInclude Include="Object\MechDrop.h" />

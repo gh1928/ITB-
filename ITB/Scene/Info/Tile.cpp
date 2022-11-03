@@ -13,6 +13,7 @@ Tile::Tile()
 	int index = tileCount % 64;
 	indexI = index / 8;
 	indexJ = index % 8;
+	nodeInfo = 0;
 }
 
 Tile::~Tile()
@@ -59,6 +60,7 @@ void Tile::Init(Scene* scene, MapInfo* mapInfo)
 	this->mapInfo = mapInfo;	
 	this->phase = this->mapInfo->GetPhase();
 	
+	chekingObject = mapInfo->GetChekingObject();
 	deployChecked = false;
 
 	if ((1 <= indexI && indexI <= 6) && (1 <= indexJ && indexJ <= 3))
@@ -69,6 +71,7 @@ void Tile::Init(Scene* scene, MapInfo* mapInfo)
 
 	SetStartObject();
 
+	objList.push_back(new MoveCheck);
 	objList.push_back(new SelectionCheck(isCursor, *this->phase));
 	
 	for (auto obj : objList)
@@ -93,12 +96,12 @@ void Tile::SetPos(Vector2f pos)
 
 void Tile::Update(float dt)
 {	
-	isMechSpace = actObjList.empty() ? true : false;	
+	isMechSpace = (actObjList.empty() && vekList.empty()) ? true : false;			
 
-	//UpdateNode();
-
-	UpdateStartPhase(dt);		
+	UpdateStartPhase(dt);	
 	UpdateDeployPhase(dt);
+	UpdatePlayerPhase(dt);
+	UpdateMovePhase(dt);
 
 	ObjUpdate(dt);
 }
@@ -161,7 +164,7 @@ void Tile::UpdateStartPhase(float dt)
 	mechDroppable =
 		      ((1 <= indexI && indexI <= 6)
 			&& (1 <= indexJ && indexJ <= 3)
-			&& isMechSpace) ? true : false;	
+			&& isMechSpace && mechList.empty()) ? true : false;	
 
 	if (isCursor && !deployChecked)
 	{		
@@ -180,8 +183,8 @@ void Tile::UpdateStartPhase(float dt)
 	{
 		if (mechDroppable && isCursor)
 		{
-			uiObjList.push_front(new MechDrop(true));
-			uiObjList.front()->SetPos(position);
+			uiObjList.push_back(new MechDrop(true));
+			uiObjList.back()->SetPos(position);
 			MechDropEvent();
 		}
 	}
@@ -215,6 +218,34 @@ void Tile::UpdateDeployPhase(float dt)
 			delete ptr;
 	}
 	uiObjList.clear();
+}
+
+void Tile::UpdatePlayerPhase(float dt)
+{
+	if (*phase != GamePhase::Player)
+		return;	
+
+	ShowMovePos();
+
+	objList.front()->SetActive(nodeInfo ? true : false);
+}
+
+void Tile::UpdateMovePhase(float dt)
+{
+	if (*phase != GamePhase::Move)
+		return;
+
+	if (isCursor &&
+		nodeInfo &&
+		mechList.empty() &&
+		InputMgr::GetMouseButtonDown(Mouse::Left))
+	{
+		Vector2i mechPos = mapInfo->GetPathList()->back();
+		Mech* mech = mapInfo->GetTilesInfo(mechPos.x, mechPos.y).GetMechList()->front();
+		mapInfo->GetTilesInfo(mechPos.x, mechPos.y).GetMechList()->pop_front();
+		mechList.push_back(mech);
+		*phase = GamePhase::Player;
+	}
 }
 
 void Tile::SetStartObject()
@@ -259,31 +290,41 @@ void Tile::MechDropEvent()
 	mechList.back()->SetActive(false);
 }
 
-
-void Tile::UpNodeUpdate()
-{	
-	upNode = mapInfo->TileSpace(indexI, indexJ - 1);
-}
-
-void Tile::LNodeUpdate()
-{	
-	lfNode = mapInfo->TileSpace(indexI + 1, indexJ);
-}
-
-void Tile::RNodeUpdate()
+void Tile::ShowMovePos()
 {
-	rtNode = mapInfo->TileSpace(indexI - 1, indexJ);
+	if (isCursor && !mechList.empty())
+	{
+		FloodFill(indexI, indexJ, mechList.front()->GetMove() + 1);
+		if (InputMgr::GetMouseButtonDown(Mouse::Left))
+		{
+			*phase = GamePhase::Move;
+			mapInfo->GetPathList()->push_back({ indexI,indexJ });			
+		}
+	}
 }
 
-void Tile::DnNodeUpdate()
+void Tile::FloodFill(int i, int j, int move)
 {
-	dnNode = mapInfo->TileSpace(indexI, indexJ + 1);
-}
+	mapInfo->GetTilesInfo(i, j).SetNodeInfo(move);
+	move--;
 
-void Tile::UpdateNode()
-{
-	UpNodeUpdate();
-	LNodeUpdate();
-	RNodeUpdate();
-	DnNodeUpdate();
+	if (j - 1 > -1 && 
+		mapInfo->GetTilesInfo(i, j - 1).IsMechSpace() &&
+		mapInfo->GetTilesInfo(i, j - 1).GetNodeInfo() < move )
+		FloodFill(i, j - 1, move);
+
+	if (i - 1 > -1 && 
+		mapInfo->GetTilesInfo(i - 1, j).IsMechSpace() &&
+		mapInfo->GetTilesInfo(i - 1, j).GetNodeInfo() < move )
+		FloodFill(i - 1, j, move);
+
+	if (i + 1 < 8 && 
+		mapInfo->GetTilesInfo(i + 1, j).IsMechSpace() &&
+		mapInfo->GetTilesInfo(i + 1, j).GetNodeInfo() < move )
+		FloodFill(i + 1, j, move);
+
+	if (j + 1 < 8 && 
+		mapInfo->GetTilesInfo(i, j + 1).IsMechSpace() &&
+		mapInfo->GetTilesInfo(i, j + 1).GetNodeInfo() < move )
+		FloodFill(i, j + 1, move);
 }

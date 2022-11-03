@@ -22,6 +22,9 @@ void MapInfo::Init(Scene* scene, GamePhase* phase)
 	squad[1] = new CannonMech(*this->phase);
 	squad[2] = new ArtilleryMech(*this->phase);
 
+	chekingObject = false;
+	resetNodes = false;
+
 	ifstream is("stage/stage01.txt");
 	char number;
 
@@ -45,7 +48,7 @@ bool MapInfo::TileSpace(int idx1, int idx2)
 		return false;
 
 
-	return mapInfo[idx1][idx2].IsSpace();	
+	return mapInfo[idx1][idx2].IsMechSpace();	
 }
 
 void MapInfo::Update(float dt)
@@ -54,14 +57,28 @@ void MapInfo::Update(float dt)
 
 	StartPhaseUpdate(dt);
 	DeployPhaseUpdate(dt);
+	MovePhaseUpdate(dt);
+
+	if (IsCursorMoved())
+		resetNodes = true;
+	
+	prevCursorPos = currCursorPos;
 
 	for (int i = 0; i < 8; ++i)
 	{
 		for (int j = 0; j < 8; ++j)
 		{
+			if (resetNodes && *phase != GamePhase::Move)
+				mapInfo[i][j].SetNodeInfo(0);
+
+			if (mapInfo[i][j].IsCursor())
+				currCursorPos = { i,j };	
+
 			mapInfo[i][j].Update(dt);
 		}
 	}
+
+	resetNodes = false;
 }
 
 void MapInfo::StartPhaseUpdate(float dt)
@@ -93,4 +110,25 @@ void MapInfo::DeployPhaseUpdate(float dt)
 		if (!i->GetActive())
 			return;
 	}	
+}
+
+void MapInfo::PlayerPhaseUpdate(float dt)
+{
+	if (*phase != GamePhase::Player)
+		return;
+
+
+}
+
+void MapInfo::MovePhaseUpdate(float dt)
+{
+	if (*phase != GamePhase::Move)
+		return;
+
+	
+}
+
+bool MapInfo::IsCursorMoved()
+{
+	return prevCursorPos != currCursorPos;
 }

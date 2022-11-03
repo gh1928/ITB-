@@ -12,9 +12,11 @@ graphics/tiles/mountain_0_broken.png,0
 graphics/tiles/mountain_explode.png,0
 graphics/tiles/ground_rail.png,0
 graphics/ui/bar_date.png,0
+graphics/ui/movecheck.png,0
 graphics/ui/tilesel.png,0
 graphics/ui/setmechpos.png,0
 graphics/ui/mouse/pointer.png,0
+graphics/ui/mouse/pointer_move.png,0
 graphics/ui/startphase/deployment_arrow.png,0
 graphics/ui/startphase/deployment_x.png,0
 graphics/ui/startphase/fall_shadow.png,0

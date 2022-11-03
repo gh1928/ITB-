@@ -7,6 +7,7 @@
 #include "../Object/TileCover/FillStartPos.h"
 #include "../Object/TileCover/SelectionCheck.h"
 #include "../Object/TileCover/Water.h"
+#include "../Object/TileCover/MoveCheck.h"
 
 #include "../Object/MechDrop.h"
 
